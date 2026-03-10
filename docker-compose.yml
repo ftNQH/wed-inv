@@ -1,0 +1,7 @@
+services:
+  web:
+    build: .
+    container_name: wedding-inv
+    ports:
+      - "8080:80"
+    restart: unless-stopped
