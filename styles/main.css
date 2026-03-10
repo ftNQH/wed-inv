@@ -1,0 +1,1083 @@
+:root {
+    /* New Palette based on image */
+    --primary-moss: #5D6F5B;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --bg-light: #F9F9F9;
+    --white: #FFFFFF;
+    --gold-accent: #C4A484;
+
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Montserrat', sans-serif;
+
+    /* Responsive cố định: dùng chung cho mọi thiết bị */
+    --content-max: 1000px;
+    --content-padding: 1.5rem;
+    --breakpoint-sm: 480px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 1024px;
+    /* Timeline mobile: đường thẳng và chấm tròn cùng 1 vị trí */
+    --timeline-line-left: 31px;
+    --timeline-dot-left: 25px;
+
+    /* iPhone safe area (notch, home indicator) */
+    --safe-top: env(safe-area-inset-top, 0px);
+    --safe-right: env(safe-area-inset-right, 0px);
+    --safe-bottom: env(safe-area-inset-bottom, 0px);
+    --safe-left: env(safe-area-inset-left, 0px);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    /* iOS: chiều cao đầy đủ kể cả khi thanh địa chỉ ẩn */
+    min-height: -webkit-fill-available;
+}
+
+body {
+    font-family: var(--font-body);
+    background: var(--white);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
+    /* iPhone: tránh highlight xanh khi tap */
+    -webkit-tap-highlight-color: transparent;
+    tap-highlight-color: transparent;
+    /* Tránh overscroll kéo cả trang */
+    overscroll-behavior-y: none;
+}
+
+/* Dùng chung content-max để mọi section cùng một khung trên mọi máy */
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* Typography */
+h1,
+h2,
+h3 {
+    font-family: var(--font-heading);
+    color: var(--text-dark);
+}
+
+
+
+.section-title {
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.hero-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Ensure content overlays the image */
+.hero-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Mobile: hero cao bằng 1 màn hình (như ảnh tham chiếu) */
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .hero-section .responsive-wrapper {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .hero-section .responsive-wrapper picture {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .hero-section .hero-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
+
+.hero-overlay {
+    text-align: center;
+    padding-top: max(clamp(2rem, 5vh, 4rem), var(--safe-top));
+    color: var(--white);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Chữ hero tỉ lệ với màn hình (vmin = min(viewport width, height)) */
+.wedding-invitation-text {
+    font-size: clamp(0.65rem, 2.2vmin, 0.9rem);
+    letter-spacing: clamp(2px, 0.5vmin, 4px);
+    text-transform: uppercase;
+    color: #EEE;
+    margin-bottom: clamp(0.5rem, 2vmin, 1rem);
+}
+
+.hero-heart {
+    color: #E57373;
+    font-size: clamp(1rem, 3vmin, 1.5rem);
+    margin: clamp(0.5rem, 2vmin, 1rem) 0;
+    animation: pulse 2s infinite;
+}
+
+.main-title {
+    font-size: clamp(1.75rem, 10vmin, 2rem);
+    color: #FFF;
+    font-weight: 400;
+    letter-spacing: clamp(1px, 0.3vmin, 2px);
+    margin-bottom: clamp(0.25rem, 1vmin, 0.5rem);
+}
+
+.tagline {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: clamp(0.7rem, 2vmin, 0.9rem);
+    letter-spacing: clamp(1px, 0.3vmin, 2px);
+}
+
+.top-decor {
+    width: 120px;
+    margin: 0 auto 1rem;
+    filter: brightness(0) invert(1);
+}
+
+/* Hero Bottom Bar - padding cố định mọi máy + safe area iPhone */
+.hero-bottom-bar {
+    background: rgba(44, 44, 44, 0.4);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+    padding: 1.5rem var(--safe-left) calc(1.5rem + var(--safe-bottom)) var(--safe-right);
+    color: white;
+    font-family: var(--font-heading);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: clamp(0.65rem, 2vmin, 0.8rem);
+    letter-spacing: clamp(0.5px, 0.2vmin, 1px);
+}
+
+.info-item strong {
+    font-size: clamp(0.85rem, 2.5vmin, 1rem);
+    margin-top: clamp(0.2rem, 0.8vmin, 0.3rem);
+}
+
+@media(max-width: 768px) {
+    .hero-bottom-bar {
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem var(--safe-left) calc(1rem + var(--safe-bottom)) var(--safe-right);
+        background: rgba(44, 44, 44, 0.6);
+    }
+
+    .info-item {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Couple Section */
+.couple-section {
+    padding: 5rem 0;
+}
+
+.container {
+    max-width: var(--content-max);
+    margin: 0 auto;
+    padding: 0 max(var(--content-padding), var(--safe-left)) 0 max(var(--content-padding), var(--safe-right));
+}
+
+.couple-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    align-items: center;
+}
+
+.couple-card {
+    text-align: center;
+    width: 100%;
+}
+
+.img-circle-wrapper {
+    width: 100%;
+    max-width: 250px;
+    aspect-ratio: 3/4;
+    /* Maintains oval shape scaling */
+    height: auto;
+    border-radius: 500px;
+    /* Large value for pill shape */
+    overflow: hidden;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.img-circle-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.couple-info h2 {
+    font-size: 2.5rem;
+    color: var(--primary-moss);
+    margin-bottom: 0.5rem;
+}
+
+.couple-info p {
+    color: #888;
+    font-style: italic;
+}
+
+.social-links {
+    margin-top: 1rem;
+}
+
+.social-links a {
+    margin: 0 0.5rem;
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.social-links a:hover {
+    color: var(--primary-moss);
+}
+
+@media(min-width: 768px) {
+    .couple-grid {
+        flex-direction: row;
+        justify-content: center;
+        gap: 4rem;
+    }
+
+    .couple-card:nth-child(2) {
+        margin-top: 100px;
+    }
+
+    /* Staggered look */
+}
+
+/* Wedding Day Section */
+.section-bg {
+    background-color: #fff;
+    padding: 5rem 0;
+}
+
+.section-decor {
+    width: 80px;
+    margin: 0 auto 1rem;
+    opacity: 0.5;
+}
+
+.date-display {
+    letter-spacing: 3px;
+    font-size: 0.9rem;
+    color: #888;
+    margin-bottom: 0.5rem;
+}
+
+/* Countdown */
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 4rem;
+}
+
+.time-box {
+    width: 80px;
+    height: 80px;
+    background: white;
+    border: 1px solid #EEE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.time-box span {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-moss);
+}
+
+.time-box label {
+    font-size: 0.7rem;
+    color: #999;
+    text-transform: uppercase;
+    margin-top: 0.2rem;
+}
+
+/* Countdown + Events: màn hình rất nhỏ (điện thoại nhỏ) */
+@media (max-width: 520px) {
+    .countdown-container {
+        gap: 0.5rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .time-box {
+        width: 64px;
+        height: 64px;
+    }
+
+    .time-box span {
+        font-size: 1.2rem;
+    }
+
+    .time-box label {
+        font-size: 0.6rem;
+    }
+
+    .event-card {
+        padding: 1.5rem 1.25rem;
+    }
+
+    .event-card h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Events Grid */
+.events-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+.event-card {
+    background: white;
+    padding: 2.5rem;
+    border: 1px solid #EEE;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.event-card h3 {
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    color: var(--primary-moss);
+}
+
+.event-card p {
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.btn-outline {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.8rem 2rem;
+    border: 1px solid #DDD;
+    color: #555;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: var(--primary-moss);
+    color: white;
+    border-color: var(--primary-moss);
+}
+
+/* iPhone: bỏ highlight xanh khi chạm vào nút/link */
+a,
+button,
+.btn-outline {
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media(min-width: 768px) {
+    .events-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* Gallery Slider */
+.gallery-section {
+    padding: 4rem 0;
+    background: white;
+}
+
+.gallery-slider {
+    position: relative;
+    max-width: min(1200px, calc(100% - 2 * max(var(--content-padding), var(--safe-left))));
+    margin: 0 auto;
+    padding: 0 max(var(--content-padding), var(--safe-left)) 0 max(var(--content-padding), var(--safe-right));
+    overflow: hidden;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    width: 100%;
+}
+
+/* Mỗi slide chiếm đúng 100% khung nhìn → chỉ hiện 1 ảnh tại một thời điểm */
+.gallery-slider .slide {
+    flex: 0 0 100%;
+    width: 100%;
+    min-width: 0;
+}
+
+.gallery-slider .slide img {
+    width: 100%;
+    height: auto;
+    max-height: 84vh; /* ~20% to hơn (70vh × 1.2) */
+    flex-shrink: 0;
+    object-fit: contain;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Lightbox: xem ảnh phóng to khi click — tối ưu iPhone safe area */
+.lightbox {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0, 0, 0, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: max(2rem, var(--safe-top)) max(2rem, var(--safe-right)) max(2rem, var(--safe-bottom)) max(2rem, var(--safe-left));
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.lightbox.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.lightbox .lightbox-img {
+    max-width: min(95vw, calc(100vw - 2rem));
+    max-height: 95vh;
+    max-height: min(95vh, 95dvh);
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    cursor: default;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: max(1.5rem, var(--safe-top));
+    right: max(1.5rem, var(--safe-right));
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    border: none;
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.2s;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.lightbox-close:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Slider Navigation Buttons */
+button.prev,
+button.next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    color: var(--text-dark);
+    padding: 1rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+    user-select: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+button.prev {
+    left: max(20px, var(--safe-left));
+}
+
+button.next {
+    right: max(20px, var(--safe-right));
+}
+
+button.prev,
+button.next {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button.prev:hover,
+button.next:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--primary-moss);
+}
+
+@media(max-width: 768px) {
+    .gallery-slider .slide img {
+        max-height: 480px; /* ~20% to hơn (400 × 1.2) */
+    }
+
+    button.prev,
+    button.next {
+        padding: 0.5rem;
+        width: 44px;
+        height: 44px;
+        font-size: 1.2rem;
+    }
+
+    /* Lightbox: padding + safe area trên iPhone */
+    .lightbox {
+        padding: max(1rem, var(--safe-top)) max(1rem, var(--safe-right)) max(1rem, var(--safe-bottom)) max(1rem, var(--safe-left));
+    }
+
+    .lightbox-close {
+        top: max(0.75rem, var(--safe-top));
+        right: max(0.75rem, var(--safe-right));
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1.75rem;
+    }
+
+    /* Lời cảm ơn: padding vừa hơn trên mobile */
+    .thank-you-block {
+        padding: 2.5rem var(--content-padding) 3.5rem;
+        gap: 1.75rem;
+    }
+
+    .thank-you-message {
+        font-size: 1.05rem;
+    }
+
+    .thank-you-sign {
+        font-size: 1.2rem;
+    }
+}
+
+/* Timeline / Love Story */
+.story-section {
+    padding: 5rem 0;
+}
+
+.story-section .container {
+    max-width: min(900px, 100%);
+}
+
+.icon-title {
+    font-size: 2rem;
+    color: var(--gold-accent);
+    display: block;
+    margin-bottom: 1rem;
+}
+
+.quote {
+    font-style: italic;
+    color: var(--text-light);
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+}
+
+/* --- Khung timeline --- */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--content-padding);
+}
+
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, var(--primary-moss), transparent);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -1px;
+    z-index: 0;
+}
+
+/* --- Ô timeline (trái/phải) --- */
+.timeline-item {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: calc(50% - 24px);
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+    z-index: 1;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-item.left {
+    left: 0;
+    padding-right: 24px;
+    text-align: right;
+}
+
+.timeline-item.right {
+    left: calc(50% + 24px);
+    padding-left: 24px;
+    text-align: left;
+}
+
+/* Chấm tròn trên đường timeline */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: var(--white);
+    border: 3px solid var(--primary-moss);
+    border-radius: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    box-shadow: 0 0 0 2px var(--bg-light);
+}
+
+.timeline-item.left::after {
+    left: calc(100% + 24px);
+    right: auto;
+}
+
+.timeline-item.right::after {
+    left: calc(-24px - 7px);
+    right: auto;
+    transform: translateY(-50%);
+}
+
+/* --- Nội dung trong ô --- */
+.timeline-content {
+    width: 100%;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+    border: 1px solid rgba(93, 111, 91, 0.15);
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.2s ease;
+}
+
+.timeline-content:hover {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-content h3 {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    color: var(--text-dark);
+    margin-bottom: 0.35rem;
+    font-weight: 600;
+}
+
+.timeline-content .date {
+    font-size: 0.75rem;
+    color: var(--gold-accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.75rem;
+}
+
+.timeline-content p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* --- Mobile: timeline dọc bên trái --- */
+@media (max-width: 768px) {
+    .timeline::after {
+        left: var(--timeline-line-left);
+        margin-left: 0;
+        background: var(--primary-moss);
+        opacity: 0.4;
+    }
+
+    .timeline-item {
+        width: 100%;
+        left: 0 !important;
+        margin-bottom: 1.5rem;
+        padding: 0 0 0 calc(var(--timeline-dot-left) + 14px + 1rem) !important;
+        text-align: left;
+    }
+
+    .timeline-item.left,
+    .timeline-item.right {
+        padding-right: var(--content-padding) !important;
+    }
+
+    .timeline-item::after {
+        width: 12px;
+        height: 12px;
+        border-width: 2px;
+        left: var(--timeline-dot-left) !important;
+        transform: translate(-50%, -50%);
+    }
+
+    .timeline-item.left::after,
+    .timeline-item.right::after {
+        left: var(--timeline-dot-left) !important;
+    }
+
+    .timeline-content {
+        padding: 1rem 1.25rem;
+    }
+
+    .timeline-content h3 {
+        font-size: 1.1rem;
+    }
+
+    .timeline-content .date {
+        font-size: 0.7rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .timeline-content p {
+        font-size: 0.9rem;
+    }
+}
+
+/* RSVP Photo */
+.rsvp-section-photo {
+    /* bg image removed, replaced by img tag */
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+.rsvp-bg {
+    width: 100%;
+    height: auto;
+    display: block;
+    clip-path: inset(0 0 5% 0);
+}
+
+/* Lời cảm ơn: ảnh trái, chữ phải — to hơn ~20% */
+.rsvp-section-photo .thank-you-block.container {
+    max-width: min(1200px, calc(100% - 2 * var(--content-padding)));
+}
+
+.thank-you-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2.4rem;
+    padding: 3.6rem var(--content-padding) 4.8rem;
+    align-items: center;
+}
+
+.thank-you-image {
+    flex: 0 0 auto;
+    width: 100%;
+    max-width: 384px;
+}
+
+.thank-you-image img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.thank-you-text {
+    flex: 1;
+    text-align: center;
+}
+
+.thank-you-text .section-title {
+    margin-bottom: 1.2rem;
+}
+
+.thank-you-message {
+    font-size: 1.2rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 1.8rem;
+}
+
+.thank-you-sign {
+    font-family: var(--font-heading);
+    font-size: 1.44rem;
+    font-style: italic;
+    color: var(--primary-moss);
+}
+
+@media (min-width: 768px) {
+    .thank-you-block {
+        flex-direction: row;
+        align-items: center;
+        gap: 3.6rem;
+        padding: 4.8rem var(--content-padding) 6rem;
+    }
+
+    .thank-you-image {
+        max-width: 456px;
+    }
+
+    .thank-you-text {
+        text-align: left;
+    }
+}
+
+.rsvp-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: clamp(20%, 35vh, 40%);
+    justify-content: center;
+    padding: 0 var(--content-padding);
+}
+
+.rsvp-overlay {
+    background: rgba(255, 255, 255, 0.4);
+    padding: var(--content-padding);
+    border-radius: 8px;
+    max-width: min(600px, calc(100% - 2 * var(--content-padding)));
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.white-text {
+    color: #000000;
+}
+
+.glass-form {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.glass-form input,
+.glass-form select {
+    padding: 1rem;
+    border: none;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 4px;
+}
+
+.btn-white {
+    padding: 1rem;
+    border: none;
+    background: white;
+    color: var(--text-dark);
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+.btn-white:hover {
+    background: #EEE;
+}
+
+/* Gift Section */
+.gift-section {
+    padding: 5rem 0;
+    background: #FDFDFD;
+}
+
+.gift-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+    flex-wrap: wrap;
+}
+
+.gift-card {
+    background: white;
+    border: 1px solid #EEE;
+    padding: 2rem;
+    width: 250px;
+    text-align: center;
+}
+
+.gift-icon {
+    font-size: 2.5rem;
+    color: #0070BA;
+    margin-bottom: 1rem;
+}
+
+.btn-small {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background: #F0F0F0;
+    border: none;
+    cursor: pointer;
+}
+
+/* Footer */
+footer {
+    background: white;
+    padding: 4rem max(1rem, var(--safe-left)) calc(4rem + var(--safe-bottom)) max(1rem, var(--safe-right));
+    text-align: center;
+    border-top: 1px solid #EEE;
+}
+
+.footer-logo {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    color: var(--gold-accent);
+    margin-bottom: 1rem;
+}
+
+.credits {
+    font-size: 0.8rem;
+    color: #CCC;
+    margin-top: 2rem;
+}
+
+/* Animations */
+.fade-in-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1s;
+}
+
+.fade-in-on-scroll.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@media (orientation: landscape) {
+
+    /* Responsive Wrapper: Holds the main content (image + overlay) */
+    .responsive-wrapper {
+        width: 60%;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Hero Section Background Blur */
+    .hero-section::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        background-image: url('../assets/images/WAGO4909.jpg');
+        background-size: cover;
+        background-position: center;
+        filter: blur(20px);
+        z-index: 1;
+        opacity: 0.8;
+    }
+
+    /* RSVP Section Background Blur */
+    .rsvp-section-photo::before {
+        content: "";
+        position: absolute;
+        top: -20px;
+        left: -20px;
+        right: -20px;
+        bottom: -20px;
+        background-size: cover;
+        background-position: center;
+        filter: blur(20px);
+        z-index: 1;
+        opacity: 0.8;
+    }
+
+    /* Reset width for sections to allow full-width background */
+    .hero-section,
+    .rsvp-section-photo {
+        width: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+}

@@ -1,0 +1,14 @@
+# Git
+.git
+.gitignore
+
+# IDE & OS
+.vscode
+.idea
+*.md
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+.dockerignore
